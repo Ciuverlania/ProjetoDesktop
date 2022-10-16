@@ -36,6 +36,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Super Senac");
 
         btnVenda.setText("Venda");
         btnVenda.addActionListener(new java.awt.event.ActionListener() {
