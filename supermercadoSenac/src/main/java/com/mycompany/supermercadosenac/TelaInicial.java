@@ -48,10 +48,25 @@ public class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnVenda.setText("Venda");
+        btnVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVendaActionPerformed(evt);
+            }
+        });
 
         btnProduto.setText("Produto");
+        btnProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdutoActionPerformed(evt);
+            }
+        });
 
         btnCliente.setText("Cliente");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClienteActionPerformed(evt);
+            }
+        });
 
         btnRelatorio.setText("Relatório");
         btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
@@ -88,14 +103,29 @@ public class TelaInicial extends javax.swing.JFrame {
 
         mnuVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mnuVenda.setText("Vendas");
+        mnuVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuVendaActionPerformed(evt);
+            }
+        });
         mnuMenu.add(mnuVenda);
 
         mnuCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mnuCliente.setText("Cliente");
+        mnuCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuClienteActionPerformed(evt);
+            }
+        });
         mnuMenu.add(mnuCliente);
 
         mnuProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mnuProduto.setText("Produto");
+        mnuProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProdutoActionPerformed(evt);
+            }
+        });
         mnuMenu.add(mnuProduto);
 
         mnuRelatorio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -160,6 +190,36 @@ public class TelaInicial extends javax.swing.JFrame {
         TelaRelatorio novaJanela = new TelaRelatorio();
         novaJanela.setVisible(true);
     }//GEN-LAST:event_mnuRelatorioActionPerformed
+
+    private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
+        TelaVenda novaJanela = new TelaVenda();
+        novaJanela.setVisible(true);
+    }//GEN-LAST:event_btnVendaActionPerformed
+
+    private void mnuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVendaActionPerformed
+        TelaVenda novaJanela = new TelaVenda();
+        novaJanela.setVisible(true);
+    }//GEN-LAST:event_mnuVendaActionPerformed
+
+    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
+        TelaProduto novaJanela = new TelaProduto();
+        novaJanela.setVisible(true);
+    }//GEN-LAST:event_btnProdutoActionPerformed
+
+    private void mnuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutoActionPerformed
+        TelaProduto novaJanela = new TelaProduto();
+        novaJanela.setVisible(true);
+    }//GEN-LAST:event_mnuProdutoActionPerformed
+
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        TelaCliente novaJanela = new TelaCliente();
+        novaJanela.setVisible(true);
+    }//GEN-LAST:event_btnClienteActionPerformed
+
+    private void mnuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuClienteActionPerformed
+        TelaCliente novaJanela = new TelaCliente();
+        novaJanela.setVisible(true);
+    }//GEN-LAST:event_mnuClienteActionPerformed
 
     /**
      * @param args the command line arguments
