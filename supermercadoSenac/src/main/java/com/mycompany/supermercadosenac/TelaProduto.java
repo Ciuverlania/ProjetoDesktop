@@ -5,6 +5,7 @@
 package com.mycompany.supermercadosenac;
 
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -181,7 +182,10 @@ public class TelaProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
-        // TODO add your handling code here:
+        if (txtBuscarProduto.getText().length() == 0) {
+            //evt.consume();
+            JOptionPane.showMessageDialog(this,"Digite o nome ou ID do produto para pesquisar!");
+        }
     }//GEN-LAST:event_btnBuscarProdutoActionPerformed
 
     private void txtBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarProdutoActionPerformed

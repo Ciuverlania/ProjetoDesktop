@@ -4,6 +4,8 @@
  */
 package com.mycompany.supermercadosenac;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Eduardo
@@ -77,6 +79,11 @@ public class CadastroProduto extends javax.swing.JFrame {
         });
 
         btnSalvarProduto.setText("Salvar");
+        btnSalvarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,6 +160,25 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void txtEstoqueProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstoqueProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEstoqueProdutoActionPerformed
+
+    private void btnSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProdutoActionPerformed
+        if (txtIDProduto.getValue() == null) {
+            //evt.consume();
+            JOptionPane.showMessageDialog(this,"Digite o ID do produto!");
+        }
+        else if (txtDescricaoProduto.getText().length() == 0) {
+            //evt.consume();
+            JOptionPane.showMessageDialog(this,"Digite a descrição do produto!");
+        }
+        else if (txtEstoqueProduto.getValue() == null) {
+            //evt.consume();
+            JOptionPane.showMessageDialog(this,"Digite a quantidade existente do produto!");
+        }
+        else if (txtPrecoProduto.getValue() == null) {
+            //evt.consume();
+            JOptionPane.showMessageDialog(this,"Digite o preço do produto!");
+        }
+    }//GEN-LAST:event_btnSalvarProdutoActionPerformed
 
     /**
      * @param args the command line arguments

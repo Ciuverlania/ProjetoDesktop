@@ -40,12 +40,12 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuMenu = new javax.swing.JMenu();
         mnuVenda = new javax.swing.JMenuItem();
-        mnuCliente = new javax.swing.JMenuItem();
         mnuProduto = new javax.swing.JMenuItem();
+        mnuCliente = new javax.swing.JMenuItem();
         mnuRelatorio = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Super Senac");
 
         btnVenda.setText("Venda");
         btnVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +75,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
@@ -110,15 +110,6 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         mnuMenu.add(mnuVenda);
 
-        mnuCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        mnuCliente.setText("Cliente");
-        mnuCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuClienteActionPerformed(evt);
-            }
-        });
-        mnuMenu.add(mnuCliente);
-
         mnuProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mnuProduto.setText("Produto");
         mnuProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +118,15 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         mnuMenu.add(mnuProduto);
+
+        mnuCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnuCliente.setText("Cliente");
+        mnuCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuClienteActionPerformed(evt);
+            }
+        });
+        mnuMenu.add(mnuCliente);
 
         mnuRelatorio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mnuRelatorio.setText("Relatório");
@@ -138,9 +138,6 @@ public class TelaInicial extends javax.swing.JFrame {
         mnuMenu.add(mnuRelatorio);
 
         jMenuBar1.add(mnuMenu);
-
-        jMenu2.setText("editar");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -192,34 +189,34 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuRelatorioActionPerformed
 
     private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
-        TelaVenda novaJanela = new TelaVenda();
-        novaJanela.setVisible(true);
+        TelaVenda janelaVenda = new TelaVenda();
+        janelaVenda.setVisible(true);
     }//GEN-LAST:event_btnVendaActionPerformed
 
-    private void mnuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVendaActionPerformed
-        TelaVenda novaJanela = new TelaVenda();
-        novaJanela.setVisible(true);
-    }//GEN-LAST:event_mnuVendaActionPerformed
-
-    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
-        TelaProduto novaJanela = new TelaProduto();
-        novaJanela.setVisible(true);
-    }//GEN-LAST:event_btnProdutoActionPerformed
-
-    private void mnuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutoActionPerformed
-        TelaProduto novaJanela = new TelaProduto();
-        novaJanela.setVisible(true);
-    }//GEN-LAST:event_mnuProdutoActionPerformed
-
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
-        TelaCliente novaJanela = new TelaCliente();
-        novaJanela.setVisible(true);
+        TelaCliente janelaCliente = new TelaCliente();
+        janelaCliente.setVisible(true);
     }//GEN-LAST:event_btnClienteActionPerformed
 
+    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
+        TelaProduto janelaProduto = new TelaProduto();
+        janelaProduto.setVisible(true);
+    }//GEN-LAST:event_btnProdutoActionPerformed
+
+    private void mnuVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVendaActionPerformed
+        TelaVenda janelaVenda = new TelaVenda();
+        janelaVenda.setVisible(true);
+    }//GEN-LAST:event_mnuVendaActionPerformed
+
     private void mnuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuClienteActionPerformed
-        TelaCliente novaJanela = new TelaCliente();
-        novaJanela.setVisible(true);
+        TelaCliente janelaCliente = new TelaCliente();
+        janelaCliente.setVisible(true);
     }//GEN-LAST:event_mnuClienteActionPerformed
+
+    private void mnuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutoActionPerformed
+        TelaProduto janelaProduto = new TelaProduto();
+        janelaProduto.setVisible(true);
+    }//GEN-LAST:event_mnuProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,7 +260,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnVenda;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem mnuCliente;
