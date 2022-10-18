@@ -46,6 +46,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         txtNascimentoCliente = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro Cliente");
 
         btnSalvarCliente.setText("Salvar");
         btnSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
