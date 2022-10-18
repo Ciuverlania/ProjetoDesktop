@@ -4,6 +4,8 @@
  */
 package com.mycompany.supermercadosenac;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lara
@@ -76,6 +78,11 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
         btnGerar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGerar.setText("Gerar Relatório");
+        btnGerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,6 +145,17 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarActionPerformed
+        if (txtDataInicial.getValue() == null) {
+            //evt.consume();
+            JOptionPane.showMessageDialog(this,"Digite a data inicial!");
+        }
+        else if (txtDataFinal.getValue() == null) {
+            //evt.consume();
+            JOptionPane.showMessageDialog(this,"Digite a data final!");
+        }
+    }//GEN-LAST:event_btnGerarActionPerformed
 
     /**
      * @param args the command line arguments
