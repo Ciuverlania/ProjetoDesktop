@@ -20,6 +20,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         setPreferredSize(new Dimension(1000,800));
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

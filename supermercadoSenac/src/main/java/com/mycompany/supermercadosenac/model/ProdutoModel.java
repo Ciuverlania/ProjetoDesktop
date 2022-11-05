@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modulo;
+package com.mycompany.supermercadosenac.model;
 
 /**
  *
  * @author henrick.afcamara
  */
-public class Produto {
+public class ProdutoModel {
 
 // Variavel da class
     private static String produtos;
@@ -25,7 +25,7 @@ public class Produto {
 
     // Ações
 
-    public Produto(String descricaoProduto, String nomeProduto, int codProduto, int idProduto, int pesoProduto, int quantidadeProduto, double precoProduto) {
+    public ProdutoModel(String descricaoProduto, String nomeProduto, int codProduto, int idProduto, int pesoProduto, int quantidadeProduto, double precoProduto) {
         this.descricaoProduto = descricaoProduto;
         this.nomeProduto = nomeProduto;
         this.codProduto = codProduto;
@@ -41,7 +41,7 @@ public class Produto {
     }
 
     public static void setProdutos(String produtos) {
-        Produto.produtos = produtos;
+        ProdutoModel.produtos = produtos;
     }
 
     public String getDescricaoProduto() {
