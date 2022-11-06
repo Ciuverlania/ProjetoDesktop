@@ -9,25 +9,23 @@ package com.mycompany.supermercadosenac.model;
  *
  * @author henrick.afcamara
  */
-public class ClienteModel {
+public class Cliente {
     
     // Variavel da class
     private static String clientes;
     
     // atributos
     private String nomeCliente;
-    private String sobrenomeCliente;// Descreve por extenso todas as informações do produto.
     private String CPFCliente;
     private int idCliente;
     private String enderecoCliente;
-    private int dataNascimento;
+    private String dataNascimento;
     private String emailCliente;
-    private char sexoCliente;
+    private String sexoCliente;
     private String estadoCivil;
     
-    public ClienteModel(String nomeCliente, String sobrenomeCliente, String CPFCliente, int idCliente, String enderecoCliente, int dataNascimento, String emailCliente, char sexoCliente, String estadoCivil) {
+    public Cliente(String nomeCliente, String CPFCliente, int idCliente, String enderecoCliente, String dataNascimento, String emailCliente, String sexoCliente, String estadoCivil) {
         this.nomeCliente = nomeCliente;
-        this.sobrenomeCliente = sobrenomeCliente;
         this.CPFCliente = CPFCliente;
         this.idCliente = idCliente;
         this.enderecoCliente = enderecoCliente;
@@ -43,7 +41,10 @@ public class ClienteModel {
     }
 
     public static void setClientes(String clientes) {
-        ClienteModel.clientes = clientes;
+        Cliente.clientes = clientes;
+    }
+
+    public Cliente() {
     }
 
     public String getNomeCliente() {
@@ -52,14 +53,6 @@ public class ClienteModel {
 
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
-    }
-    
-    public String getSobrenomeCliente() {
-        return sobrenomeCliente;
-    }
-
-    public void setSobrenomeCliente(String sobrenomeCliente) {
-        this.sobrenomeCliente = sobrenomeCliente;
     }
 
     public String getCPFCliente() {
@@ -86,11 +79,11 @@ public class ClienteModel {
         this.enderecoCliente = enderecoCliente;
     }
 
-    public int getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(int dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
         public String getEmailCliente() {
@@ -101,11 +94,11 @@ public class ClienteModel {
         this.emailCliente = emailCliente;
     }
     
-    public char getSexoCliente() {
+    public String getSexoCliente() {
         return sexoCliente;
     }
 
-    public void setSexoCliente(char sexoCliente) {
+    public void setSexoCliente(String sexoCliente) {
         this.sexoCliente = sexoCliente;
     }
     

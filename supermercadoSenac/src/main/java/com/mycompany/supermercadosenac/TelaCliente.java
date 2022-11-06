@@ -5,7 +5,14 @@
 
 package com.mycompany.supermercadosenac;
 
+import com.mycompany.supermercadosenac.dao.ClienteDAO;
+import com.mycompany.supermercadosenac.model.Cliente;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,38 +35,46 @@ public class TelaCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableCliente = new javax.swing.JTable();
+        tblCliente = new javax.swing.JTable();
         btnCadastrarCliente = new javax.swing.JButton();
         radioBuscarCPFCliente = new javax.swing.JRadioButton();
         btnExcluirCliente = new javax.swing.JButton();
         btnAlterarCliente = new javax.swing.JButton();
         btnBuscarCliente = new javax.swing.JButton();
         radioBuscarNomeCliente = new javax.swing.JRadioButton();
-        txtBuscarCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        txtBuscarCliente = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Controle Cliente");
 
-        tableCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CPF", "Nome", "Sobrenome", "Nascimento", "Endereço", "Email", "Sexo", "Estado Civil"
+                "ID", "CPF", "Nome", "Nascimento", "Endereço", "Email", "Sexo", "Estado Civil"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableCliente);
+        jScrollPane1.setViewportView(tblCliente);
 
         btnCadastrarCliente.setText("Cadastrar");
         btnCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +83,7 @@ public class TelaCliente extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(radioBuscarCPFCliente);
         radioBuscarCPFCliente.setText("Por CPF");
         radioBuscarCPFCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,11 +112,12 @@ public class TelaCliente extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(radioBuscarNomeCliente);
+        radioBuscarNomeCliente.setSelected(true);
         radioBuscarNomeCliente.setText("Por nome");
-
-        txtBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+        radioBuscarNomeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarClienteActionPerformed(evt);
+                radioBuscarNomeClienteActionPerformed(evt);
             }
         });
 
@@ -129,9 +146,9 @@ public class TelaCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAlterarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                        .addComponent(btnAlterarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnExcluirCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                        .addComponent(btnExcluirCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                         .addGap(8, 8, 8))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -140,17 +157,19 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(radioBuscarNomeCliente)
                     .addComponent(radioBuscarCPFCliente)
                     .addComponent(btnBuscarCliente)
                     .addComponent(btnCadastrarCliente)
                     .addComponent(btnAlterarCliente)
-                    .addComponent(btnExcluirCliente))
+                    .addComponent(btnExcluirCliente)
+                    .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        radioBuscarCPFCliente.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,19 +200,95 @@ public class TelaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterarClienteActionPerformed
 
     private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
-        if (txtBuscarCliente.getText().length() == 0) {
-            //evt.consume();
-            JOptionPane.showMessageDialog(this,"Digite o nome ou ID do produto para pesquisar!");
+ 
+//Caso o botão Nome esteja ativado
+        if(radioBuscarNomeCliente.isSelected()){
+            //caso a caixa esteja vazia - listará todos
+            if(txtBuscarCliente.getText().length()==0){
+                ArrayList <Cliente> lista = ClienteDAO.listar();
+                DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
+                modelo.setRowCount(0);
+                
+                for(Cliente item : lista){
+                    modelo.addRow(new String[]{String.valueOf(item.getIdCliente()),
+                                               String.valueOf(item.getCPFCliente()),
+                                               String.valueOf(item.getNomeCliente()),
+                                               String.valueOf(item.getDataNascimento()),
+                                               String.valueOf(item.getEnderecoCliente()),
+                                               String.valueOf(item.getEmailCliente()),
+                                               String.valueOf(item.getSexoCliente()),
+                                               String.valueOf(item.getEstadoCivil())});
+                }
+                //caso tenha algum nome - listará todos que tiverem aquele texto no nome
+            }else{
+                String nome = "%"+txtBuscarCliente.getText()+"%";
+                ArrayList <Cliente> lista = ClienteDAO.buscarPorNome(nome);
+                
+                DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
+                modelo.setRowCount(0);
+                for(Cliente item : lista){
+                    modelo.addRow(new String[]{String.valueOf(item.getIdCliente()),
+                                               String.valueOf(item.getCPFCliente()),
+                                               String.valueOf(item.getNomeCliente()),
+                                               String.valueOf(item.getDataNascimento()),
+                                               String.valueOf(item.getEnderecoCliente()),
+                                               String.valueOf(item.getEmailCliente()),
+                                               String.valueOf(item.getSexoCliente()),
+                                               String.valueOf(item.getEstadoCivil())});
+                }
+            }
+//Caso botão CPF esteja selecionado
+        }else{
+            //caso a caixa esteja vazia - listará todos
+            if(txtBuscarCliente.getText().length()==0){
+                ArrayList <Cliente> lista = ClienteDAO.listar();
+                DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
+                modelo.setRowCount(0);
+                
+                for(Cliente item : lista){
+                    modelo.addRow(new String[]{String.valueOf(item.getIdCliente()),
+                                               String.valueOf(item.getCPFCliente()),
+                                               String.valueOf(item.getNomeCliente()),
+                                               String.valueOf(item.getDataNascimento()),
+                                               String.valueOf(item.getEnderecoCliente()),
+                                               String.valueOf(item.getEmailCliente()),
+                                               String.valueOf(item.getSexoCliente()),
+                                               String.valueOf(item.getEstadoCivil())});
+                }
+            }else{
+                //caso tenha algum cpf - listará quem tiver aquele CPF
+                String cpf = txtBuscarCliente.getText();
+                ArrayList <Cliente> lista = ClienteDAO.buscarPorCpf(cpf);
+                
+                DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
+                modelo.setRowCount(0);
+                for(Cliente item : lista){
+                    modelo.addRow(new String[]{String.valueOf(item.getIdCliente()),
+                                               String.valueOf(item.getCPFCliente()),
+                                               String.valueOf(item.getNomeCliente()),
+                                               String.valueOf(item.getDataNascimento()),
+                                               String.valueOf(item.getEnderecoCliente()),
+                                               String.valueOf(item.getEmailCliente()),
+                                               String.valueOf(item.getSexoCliente()),
+                                               String.valueOf(item.getEstadoCivil())});
+                }
+            }
         }
+
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
-    private void txtBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarClienteActionPerformed
-
     private void radioBuscarCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBuscarCPFClienteActionPerformed
-        // TODO add your handling code here:
+        try {
+            txtBuscarCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_radioBuscarCPFClienteActionPerformed
+
+    private void radioBuscarNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBuscarNomeClienteActionPerformed
+
+        
+    }//GEN-LAST:event_radioBuscarNomeClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,13 +330,14 @@ public class TelaCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnCadastrarCliente;
     private javax.swing.JButton btnExcluirCliente;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton radioBuscarCPFCliente;
     private javax.swing.JRadioButton radioBuscarNomeCliente;
-    private javax.swing.JTable tableCliente;
-    private javax.swing.JTextField txtBuscarCliente;
+    private javax.swing.JTable tblCliente;
+    private javax.swing.JFormattedTextField txtBuscarCliente;
     // End of variables declaration//GEN-END:variables
 
 }
