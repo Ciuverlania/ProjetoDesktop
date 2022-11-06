@@ -4,8 +4,12 @@
  */
 package com.mycompany.supermercadosenac;
 
+import com.mycompany.supermercadosenac.dao.ProdutoDAO;
+import com.mycompany.supermercadosenac.model.Produto;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,11 +34,12 @@ public class TelaProduto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProduto = new javax.swing.JTable();
         btnCadastrarProduto = new javax.swing.JButton();
-        radioBuscarIDProduto = new javax.swing.JRadioButton();
+        radioBuscarCodigoProduto = new javax.swing.JRadioButton();
         btnExcluirProduto = new javax.swing.JButton();
         btnAlterarProduto = new javax.swing.JButton();
         btnBuscarProduto = new javax.swing.JButton();
@@ -50,12 +55,19 @@ public class TelaProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Produto", "Descrição", "Estoque", "Preço unitário"
+                "ID", "Código", "Nome", "Descrição", "Estoque", "Peso (kg)", "Preço unitário"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -70,7 +82,13 @@ public class TelaProduto extends javax.swing.JFrame {
             }
         });
 
-        radioBuscarIDProduto.setText("Por ID");
+        buttonGroup1.add(radioBuscarCodigoProduto);
+        radioBuscarCodigoProduto.setText("Por Código");
+        radioBuscarCodigoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBuscarCodigoProdutoActionPerformed(evt);
+            }
+        });
 
         btnExcluirProduto.setText("Excluir");
         btnExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +111,14 @@ public class TelaProduto extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(radioBuscarNomeProduto);
+        radioBuscarNomeProduto.setSelected(true);
         radioBuscarNomeProduto.setText("Por nome");
+        radioBuscarNomeProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBuscarNomeProdutoActionPerformed(evt);
+            }
+        });
 
         txtBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +143,7 @@ public class TelaProduto extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(radioBuscarNomeProduto)
                         .addGap(26, 26, 26)
-                        .addComponent(radioBuscarIDProduto)
+                        .addComponent(radioBuscarCodigoProduto)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -138,7 +163,7 @@ public class TelaProduto extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(radioBuscarNomeProduto)
-                    .addComponent(radioBuscarIDProduto)
+                    .addComponent(radioBuscarCodigoProduto)
                     .addComponent(btnBuscarProduto)
                     .addComponent(btnCadastrarProduto)
                     .addComponent(btnAlterarProduto)
@@ -163,10 +188,77 @@ public class TelaProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
-        if (txtBuscarProduto.getText().length() == 0) {
-            //evt.consume();
-            JOptionPane.showMessageDialog(this,"Digite o nome ou ID do produto para pesquisar!");
+        
+        //Caso o botão Nome esteja ativado
+        if(radioBuscarNomeProduto.isSelected()){
+            //caso a caixa esteja vazia - listará todos
+            if(txtBuscarProduto.getText().length()==0){
+                ArrayList <Produto> lista = ProdutoDAO.listar();
+                DefaultTableModel modelo = (DefaultTableModel) tableProduto.getModel();
+                modelo.setRowCount(0);
+                
+                for(Produto item : lista){
+                    modelo.addRow(new String[]{String.valueOf(item.getIdProduto()),
+                                               String.valueOf(item.getCodProduto()),
+                                               String.valueOf(item.getNomeProduto()),
+                                               String.valueOf(item.getDescricaoProduto()),
+                                               String.valueOf(item.getQuantidadeProduto()),
+                                               String.valueOf(item.getPesoProduto()),
+                                               String.valueOf(item.getPrecoProduto())});
+                }
+                //caso tenha algum nome - listará todos que tiverem aquele texto no nome
+            }else{
+                String nome = "%"+txtBuscarProduto.getText()+"%";
+                ArrayList <Produto> lista = ProdutoDAO.buscarPorNome(nome);
+                
+                DefaultTableModel modelo = (DefaultTableModel) tableProduto.getModel();
+                modelo.setRowCount(0);
+                for(Produto item : lista){
+                    modelo.addRow(new String[]{String.valueOf(item.getIdProduto()),
+                                               String.valueOf(item.getCodProduto()),
+                                               String.valueOf(item.getNomeProduto()),
+                                               String.valueOf(item.getDescricaoProduto()),
+                                               String.valueOf(item.getQuantidadeProduto()),
+                                               String.valueOf(item.getPesoProduto()),
+                                               String.valueOf(item.getPrecoProduto())});
+                }
+            }
+//Caso botão código esteja selecionado
+        }else{
+            //caso a caixa esteja vazia - listará todos
+            if(txtBuscarProduto.getText().equals("")){
+                ArrayList <Produto> lista = ProdutoDAO.listar();
+                DefaultTableModel modelo = (DefaultTableModel) tableProduto.getModel();
+                modelo.setRowCount(0);
+                
+                for(Produto item : lista){
+                    modelo.addRow(new String[]{String.valueOf(item.getIdProduto()),
+                                               String.valueOf(item.getCodProduto()),
+                                               String.valueOf(item.getNomeProduto()),
+                                               String.valueOf(item.getDescricaoProduto()),
+                                               String.valueOf(item.getQuantidadeProduto()),
+                                               String.valueOf(item.getPesoProduto()),
+                                               String.valueOf(item.getPrecoProduto())});
+                }
+            }else{
+                //caso tenha algum código - listará quem tiver aquele código
+                String codigo = txtBuscarProduto.getText();
+                ArrayList <Produto> lista = ProdutoDAO.buscarPorCodigo(codigo);
+                
+                DefaultTableModel modelo = (DefaultTableModel) tableProduto.getModel();
+                modelo.setRowCount(0);
+                for(Produto item : lista){
+                    modelo.addRow(new String[]{String.valueOf(item.getIdProduto()),
+                                               String.valueOf(item.getCodProduto()),
+                                               String.valueOf(item.getNomeProduto()),
+                                               String.valueOf(item.getDescricaoProduto()),
+                                               String.valueOf(item.getQuantidadeProduto()),
+                                               String.valueOf(item.getPesoProduto()),
+                                               String.valueOf(item.getPrecoProduto())});
+                }
+            }
         }
+        
     }//GEN-LAST:event_btnBuscarProdutoActionPerformed
 
     private void txtBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarProdutoActionPerformed
@@ -187,6 +279,14 @@ public class TelaProduto extends javax.swing.JFrame {
         janelaCadastroProduto.setVisible(true);
 
     }//GEN-LAST:event_btnCadastrarProdutoActionPerformed
+
+    private void radioBuscarNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBuscarNomeProdutoActionPerformed
+        txtBuscarProduto.setText(null);
+    }//GEN-LAST:event_radioBuscarNomeProdutoActionPerformed
+
+    private void radioBuscarCodigoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBuscarCodigoProdutoActionPerformed
+        txtBuscarProduto.setText(null);
+    }//GEN-LAST:event_radioBuscarCodigoProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,10 +328,11 @@ public class TelaProduto extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarProduto;
     private javax.swing.JButton btnCadastrarProduto;
     private javax.swing.JButton btnExcluirProduto;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton radioBuscarIDProduto;
+    private javax.swing.JRadioButton radioBuscarCodigoProduto;
     private javax.swing.JRadioButton radioBuscarNomeProduto;
     private javax.swing.JTable tableProduto;
     private javax.swing.JTextField txtBuscarProduto;

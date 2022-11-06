@@ -241,7 +241,7 @@ public class TelaCliente extends javax.swing.JFrame {
 //Caso botão CPF esteja selecionado
         }else{
             //caso a caixa esteja vazia - listará todos
-            if(txtBuscarCliente.getText().equals("   .   .   -  ")){
+            if(txtBuscarCliente.getText().equals("")){
                 ArrayList <Cliente> lista = ClienteDAO.listar();
                 DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
                 modelo.setRowCount(0);

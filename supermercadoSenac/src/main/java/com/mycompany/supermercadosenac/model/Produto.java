@@ -5,33 +5,36 @@
  */
 package com.mycompany.supermercadosenac.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author henrick.afcamara
  */
-public class ProdutoModel {
+public class Produto {
 
 // Variavel da class
     private static String produtos;
+
     
 // atributos
-    private String descricaoProduto; // Descreve por extenso todas as informações do produto.
-    private String nomeProduto;
-    private int codProduto;
     private int idProduto;
-    private int pesoProduto;
+    private String codProduto;
+    private String nomeProduto;
+    private String descricaoProduto; // Descreve por extenso todas as informações do produto.
     private int quantidadeProduto;
+    private double pesoProduto;
     private double precoProduto;
 
     // Ações
 
-    public ProdutoModel(String descricaoProduto, String nomeProduto, int codProduto, int idProduto, int pesoProduto, int quantidadeProduto, double precoProduto) {
-        this.descricaoProduto = descricaoProduto;
-        this.nomeProduto = nomeProduto;
-        this.codProduto = codProduto;
+    public Produto(int idProduto, String codProduto, String nomeProduto, String descricaoProduto, int quantidadeProduto, double pesoProduto, double precoProduto) {
         this.idProduto = idProduto;
-        this.pesoProduto = pesoProduto;
+        this.codProduto = codProduto;
+        this.nomeProduto = nomeProduto;
+        this.descricaoProduto = descricaoProduto;
         this.quantidadeProduto = quantidadeProduto;
+        this.pesoProduto = pesoProduto;
         this.precoProduto = precoProduto;
     }
 
@@ -41,7 +44,10 @@ public class ProdutoModel {
     }
 
     public static void setProdutos(String produtos) {
-        ProdutoModel.produtos = produtos;
+        Produto.produtos = produtos;
+    }
+
+    public Produto() {
     }
 
     public String getDescricaoProduto() {
@@ -60,11 +66,11 @@ public class ProdutoModel {
         this.nomeProduto = nomeProduto;
     }
 
-    public int getCodProduto() {
+    public String getCodProduto() {
         return codProduto;
     }
 
-    public void setCodProduto(int codProduto) {
+    public void setCodProduto(String codProduto) {
         this.codProduto = codProduto;
     }
 
@@ -76,11 +82,11 @@ public class ProdutoModel {
         this.idProduto = idProduto;
     }
 
-    public int getPesoProduto() {
+    public double getPesoProduto() {
         return pesoProduto;
     }
 
-    public void setPesoProduto(int pesoProduto) {
+    public void setPesoProduto(double pesoProduto) {
         this.pesoProduto = pesoProduto;
     }
 
@@ -96,7 +102,7 @@ public class ProdutoModel {
         return precoProduto;
     }
 
-    public void setPrecoProduto(int precoProduto) {
+    public void setPrecoProduto(double precoProduto) {
         this.precoProduto = precoProduto;
     }
 }
