@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -46,7 +47,7 @@ public class TelaCliente extends javax.swing.JFrame {
         btnBuscarCliente = new javax.swing.JButton();
         radioBuscarNomeCliente = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        txtBuscarCliente = new javax.swing.JFormattedTextField();
+        txtBuscarCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Controle Cliente");
@@ -240,7 +241,7 @@ public class TelaCliente extends javax.swing.JFrame {
 //Caso botão CPF esteja selecionado
         }else{
             //caso a caixa esteja vazia - listará todos
-            if(txtBuscarCliente.getText().length()==0){
+            if(txtBuscarCliente.getText().equals("   .   .   -  ")){
                 ArrayList <Cliente> lista = ClienteDAO.listar();
                 DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
                 modelo.setRowCount(0);
@@ -278,16 +279,15 @@ public class TelaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     private void radioBuscarCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBuscarCPFClienteActionPerformed
-        try {
-            txtBuscarCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        
+        txtBuscarCliente.setText(null);
+
     }//GEN-LAST:event_radioBuscarCPFClienteActionPerformed
 
     private void radioBuscarNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBuscarNomeClienteActionPerformed
 
-        
+        txtBuscarCliente.setText(null);
+                
     }//GEN-LAST:event_radioBuscarNomeClienteActionPerformed
 
     /**
@@ -337,7 +337,7 @@ public class TelaCliente extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioBuscarCPFCliente;
     private javax.swing.JRadioButton radioBuscarNomeCliente;
     private javax.swing.JTable tblCliente;
-    private javax.swing.JFormattedTextField txtBuscarCliente;
+    private javax.swing.JTextField txtBuscarCliente;
     // End of variables declaration//GEN-END:variables
 
 }

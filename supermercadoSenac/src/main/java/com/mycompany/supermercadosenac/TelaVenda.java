@@ -195,6 +195,11 @@ public class TelaVenda extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCpfCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCpfClienteActionPerformed(evt);
+            }
+        });
 
         try {
             txtIdProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
@@ -334,6 +339,10 @@ public class TelaVenda extends javax.swing.JFrame {
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnComprarActionPerformed
+
+    private void txtCpfClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfClienteActionPerformed
 
     /**
      * @param args the command line arguments

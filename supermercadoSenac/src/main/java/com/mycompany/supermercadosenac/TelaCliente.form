@@ -224,7 +224,7 @@
             <Property name="text" type="java.lang.String" value="Buscar:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtBuscarCliente">
+        <Component class="javax.swing.JTextField" name="txtBuscarCliente">
         </Component>
       </SubComponents>
     </Container>

@@ -78,6 +78,12 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         spnEstoque.setModel(new javax.swing.SpinnerNumberModel());
 
+        txtNomeProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeProdutoActionPerformed(evt);
+            }
+        });
+
         txtDescricaoProduto.setColumns(20);
         txtDescricaoProduto.setRows(5);
         jScrollPane1.setViewportView(txtDescricaoProduto);
@@ -200,6 +206,10 @@ public class CadastroProduto extends javax.swing.JFrame {
                  dispose();
              }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeProdutoActionPerformed
 
     /**
      * @param args the command line arguments
