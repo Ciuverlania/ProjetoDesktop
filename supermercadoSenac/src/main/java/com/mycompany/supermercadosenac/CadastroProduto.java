@@ -31,9 +31,9 @@ public class CadastroProduto extends javax.swing.JFrame {
         this.txtCodigoProduto.setText(String.valueOf(objProduto.getCodProduto()));
         this.txtNomeProduto.setText(String.valueOf(objProduto.getNomeProduto()));
         this.txtDescricaoProduto.setText(String.valueOf(objProduto.getDescricaoProduto()));
-        this.spnEstoque.setValue(String.valueOf(objProduto.getQuantidadeProduto()));
-        this.txtPesoProduto.setValue(Double.valueOf(objProduto.getPesoProduto()));
-        this.txtPrecoProduto.setValue(Double.valueOf(objProduto.getPrecoProduto()));
+        this.spnEstoque.setValue(objProduto.getQuantidadeProduto());
+        this.txtPesoProduto.setValue(objProduto.getPesoProduto());
+        this.txtPrecoProduto.setValue(objProduto.getPrecoProduto());
         
     }
 
@@ -235,7 +235,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             String codigoProduto=txtCodigoProduto.getText();
             String nomeProduto=txtNomeProduto.getText();
             String descricaoProduto=txtDescricaoProduto.getText();
-            int estoqueProduto= (int) spnEstoque.getValue();
+            int estoqueProduto= Integer.parseInt(spnEstoque.getValue().toString());
             double precoProduto = Double.parseDouble(txtPrecoProduto.getValue().toString());
             double pesoProduto = Double.parseDouble(txtPesoProduto.getValue().toString());
             

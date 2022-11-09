@@ -266,15 +266,35 @@ public class TelaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarProdutoActionPerformed
 
     private void btnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirProdutoActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tableProduto.getSelectedRow();
+        int id = Integer.parseInt(tableProduto.getValueAt(linhaSelecionada,0).toString());
+        boolean retorno = ProdutoDAO.excluir(id);
+        if(retorno){
+            JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
+        }else{
+            JOptionPane.showMessageDialog(this, "Falha ao excluir o produto!");
+        }
     }//GEN-LAST:event_btnExcluirProdutoActionPerformed
 
     private void btnAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarProdutoActionPerformed
-        CadastroProduto janelaCadastroProduto = new CadastroProduto();
+        int linhaSelecionada = tableProduto.getSelectedRow();
+        int id = Integer.parseInt(tableProduto.getValueAt(linhaSelecionada,0).toString());
+        String codigo = tableProduto.getValueAt(linhaSelecionada,1).toString();
+        String nome = tableProduto.getValueAt(linhaSelecionada,2).toString();
+        String descricao = tableProduto.getValueAt(linhaSelecionada,3).toString();
+        int quantidade = Integer.parseInt(tableProduto.getValueAt(linhaSelecionada,4).toString());
+        double peso = Double.parseDouble(tableProduto.getValueAt(linhaSelecionada,5).toString());
+        double preco = Double.parseDouble(tableProduto.getValueAt(linhaSelecionada,6).toString());
+        
+        
+        Produto obj = new Produto(id,codigo, nome,descricao,quantidade,peso,preco);
+        CadastroProduto janelaCadastroProduto = new CadastroProduto(obj);
         janelaCadastroProduto.setVisible(true);
     }//GEN-LAST:event_btnAlterarProdutoActionPerformed
 
     private void btnCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProdutoActionPerformed
+        
+        
         CadastroProduto janelaCadastroProduto = new CadastroProduto();
         janelaCadastroProduto.setVisible(true);
 

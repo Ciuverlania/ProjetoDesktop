@@ -72,7 +72,44 @@ public class ProdutoDAO {
     }
 
     public static boolean alterar(Produto objProduto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        boolean retorno = false;
+        Connection conexao = null;
+        
+        try {
+            //1º passo - Carregar o Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //2º passo - Abrir a conexão
+            conexao = DriverManager.getConnection(url, login, senha);
+            
+            //3º passo - Criar o comando SQL
+            PreparedStatement comandoSQL = 
+            conexao.prepareStatement("UPDATE produto SET codigo=? ,nome=? ,descricao=? ,quantidade=? ,peso=? ,preco=?  WHERE id =?; ");
+            
+            comandoSQL.setString(1, objProduto.getCodProduto());
+            comandoSQL.setString(2, objProduto.getNomeProduto());
+            comandoSQL.setString(3, objProduto.getDescricaoProduto());
+            comandoSQL.setInt   (4, objProduto.getQuantidadeProduto());
+            comandoSQL.setDouble(5, objProduto.getPesoProduto());
+            comandoSQL.setDouble(6, objProduto.getPrecoProduto());
+            comandoSQL.setInt   (7, objProduto.getIdProduto());
+            
+            //4º passo - Executar o comando
+            int linhasAfetadas = comandoSQL.executeUpdate();
+            if(linhasAfetadas>0){
+                retorno = true;
+                
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return retorno;
+
     }
 
     public static ArrayList<Produto> listar() {
@@ -211,6 +248,43 @@ public class ProdutoDAO {
         
         return lista;
         
+    }
+    
+
+    public static boolean excluir(int id) {
+
+        boolean retorno = false;
+        Connection conexao = null;
+        
+        try {
+            //1º passo - Carregar o Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //2º passo - Abrir a conexão
+            conexao = DriverManager.getConnection(url, login, senha);
+            
+            //3º passo - Criar o comando SQL
+            PreparedStatement comandoSQL = 
+            conexao.prepareStatement("DELETE FROM produto WHERE id = ?; ");
+            
+            comandoSQL.setInt(1, id);
+            
+            
+            //4º passo - Executar o comando
+            int linhasAfetadas = comandoSQL.executeUpdate();
+            if(linhasAfetadas>0){
+                retorno = true;
+                
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return retorno;
+
     }
     
 }

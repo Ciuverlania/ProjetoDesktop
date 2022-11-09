@@ -144,13 +144,13 @@ public class TelaCliente extends javax.swing.JFrame {
                         .addComponent(radioBuscarCPFCliente)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluirCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAlterarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExcluirCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                        .addGap(8, 8, 8))))
+                        .addComponent(btnAlterarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(108, 108, 108))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,11 +192,31 @@ public class TelaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tblCliente.getSelectedRow();
+        int id = Integer.parseInt(tblCliente.getValueAt(linhaSelecionada,0).toString());
+        boolean retorno = ClienteDAO.excluir(id);
+        if(retorno){
+            JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
+        }else{
+            JOptionPane.showMessageDialog(this, "Falha ao excluir o produto!");
+        }
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
-         CadastroCliente janelaCadastroCliente = new CadastroCliente();
+
+        int linhaSelecionada = tblCliente.getSelectedRow();
+        int id = Integer.parseInt(tblCliente.getValueAt(linhaSelecionada,0).toString());
+        String cpfCliente = tblCliente.getValueAt(linhaSelecionada,1).toString();
+        String nomeCliente = tblCliente.getValueAt(linhaSelecionada,2).toString();
+        String dataNascimento = tblCliente.getValueAt(linhaSelecionada,3).toString();
+        String enderecoCliente = tblCliente.getValueAt(linhaSelecionada,4).toString();
+        String emailCliente = tblCliente.getValueAt(linhaSelecionada,5).toString();
+        String sexoCliente = tblCliente.getValueAt(linhaSelecionada,6).toString();
+        String EstadoCivilCliente = tblCliente.getValueAt(linhaSelecionada,7).toString();
+        
+        Cliente objCliente = new Cliente(nomeCliente, cpfCliente, id, enderecoCliente, dataNascimento, emailCliente, sexoCliente, EstadoCivilCliente);
+        
+        CadastroCliente janelaCadastroCliente = new CadastroCliente(objCliente);
          janelaCadastroCliente.setVisible(true);
     }//GEN-LAST:event_btnAlterarClienteActionPerformed
 

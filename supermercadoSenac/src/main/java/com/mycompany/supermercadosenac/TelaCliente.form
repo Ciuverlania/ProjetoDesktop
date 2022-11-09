@@ -60,13 +60,13 @@
                           <Component id="radioBuscarCPFCliente" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnBuscarCliente" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnExcluirCliente" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnCadastrarCliente" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnCadastrarCliente" pref="91" max="32767" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnAlterarCliente" pref="79" max="32767" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnExcluirCliente" pref="82" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Component id="btnAlterarCliente" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
