@@ -278,7 +278,7 @@ public class CadastroCliente extends javax.swing.JFrame {
              
              
              String[] opcoes={"Sim, confirmar", "Não, cancelar"};
-            int confirmar = JOptionPane.showOptionDialog(this,"Confirmar Cadastro?"
+            int confirmar = JOptionPane.showOptionDialog(this,"Confirmar?"
                     + "\nCPF do Cliente: " + cpfCliente + "\nNome do cliente: " + nomeCliente +
                     "\nData de Nascimento: " + dataNascimento + "\nEndereço: " + enderecoCliente + "\ne-mail: " + emailCliente + 
                     "\nEstado Civil: " + EstadoCivilCliente + "\nSexo: " + sexoCliente
@@ -294,7 +294,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!");
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Falha ao gravar nota!");
+                    JOptionPane.showMessageDialog(this, "Falha ao cadastrar cliente!");
                 }
                  }else{
                      Cliente objCliente = new Cliente(nomeCliente, cpfCliente, id, enderecoCliente, dataNascimento, emailCliente, sexoCliente, EstadoCivilCliente);
@@ -304,7 +304,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Alterado com sucesso!!");
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Falha ao gravar nota!");
+                    JOptionPane.showMessageDialog(this, "Falha ao alterar cliente!");
                 }
                  }
                  

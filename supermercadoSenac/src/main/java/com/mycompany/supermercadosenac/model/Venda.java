@@ -10,7 +10,7 @@ import java.sql.Date;
  *
  * @author KINOO
  */
-public class VendaModel {
+public class Venda {
 
     private int idVenda;
     

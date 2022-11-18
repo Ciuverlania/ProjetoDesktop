@@ -131,9 +131,7 @@ public class TelaCliente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,14 +141,14 @@ public class TelaCliente extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(radioBuscarCPFCliente)
                         .addGap(18, 18, 18)
-                        .addComponent(btnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluirCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAlterarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(108, 108, 108))))
+                        .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAlterarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluirCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,11 +192,21 @@ public class TelaCliente extends javax.swing.JFrame {
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
         int linhaSelecionada = tblCliente.getSelectedRow();
         int id = Integer.parseInt(tblCliente.getValueAt(linhaSelecionada,0).toString());
-        boolean retorno = ClienteDAO.excluir(id);
-        if(retorno){
-            JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
-        }else{
-            JOptionPane.showMessageDialog(this, "Falha ao excluir o produto!");
+        
+        String[] opcoes={"Sim, confirmar", "Não, cancelar"};
+            
+        int confirmar = JOptionPane.showOptionDialog(this,
+                    "Confirmar exclusão?","Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opcoes,opcoes[0]);
+        
+        if(confirmar ==0){
+            boolean retorno = ClienteDAO.excluir(id);
+            if(retorno){
+                JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(this, "Falha ao excluir o cliente!");
+            }
+        } else{
+            JOptionPane.showMessageDialog(this, "Exclusão cancelada");
         }
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 

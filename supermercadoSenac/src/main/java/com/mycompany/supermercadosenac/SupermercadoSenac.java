@@ -5,6 +5,8 @@
 
 package com.mycompany.supermercadosenac;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eduardo.oesilva
@@ -13,5 +15,6 @@ public class SupermercadoSenac {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        
     }
 }

@@ -242,7 +242,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             String[] opcoes={"Sim, confirmar", "Não, cancelar"};
             
             int confirmar = JOptionPane.showOptionDialog(this,
-                    "Confirmar Cadastro?\nCódigo: " + codigoProduto + "\nNome do produto: " + nomeProduto + 
+                    "Confirmar?\nCódigo: " + codigoProduto + "\nNome do produto: " + nomeProduto + 
                     "\nDescrição: \"" + descricaoProduto + "\"\nEstoque: " + estoqueProduto +
                     "\nValor: R$" + precoProduto + "\nPeso (kg): " + pesoProduto
                     ,"Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opcoes,opcoes[0]);
@@ -257,7 +257,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!");
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Falha ao gravar nota!");
+                    JOptionPane.showMessageDialog(this, "Falha ao cadastrar produto!");
                 }
                  }else{
                     Produto objProduto = new Produto(id,codigoProduto,nomeProduto,descricaoProduto,estoqueProduto,pesoProduto,precoProduto);
@@ -267,7 +267,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Alterado com sucesso!!");
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Falha ao gravar nota!");
+                    JOptionPane.showMessageDialog(this, "Falha ao alterar produto!");
                 }
                  }
              }

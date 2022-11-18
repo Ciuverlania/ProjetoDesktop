@@ -147,11 +147,11 @@ public class TelaProduto extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCadastrarProduto)
+                        .addComponent(btnCadastrarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnAlterarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnExcluirProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluirProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -268,11 +268,21 @@ public class TelaProduto extends javax.swing.JFrame {
     private void btnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirProdutoActionPerformed
         int linhaSelecionada = tableProduto.getSelectedRow();
         int id = Integer.parseInt(tableProduto.getValueAt(linhaSelecionada,0).toString());
-        boolean retorno = ProdutoDAO.excluir(id);
-        if(retorno){
-            JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
+
+        String[] opcoes={"Sim, confirmar", "Não, cancelar"};
+            
+        int confirmar = JOptionPane.showOptionDialog(this,
+                    "Confirmar exclusão?","Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opcoes,opcoes[0]);
+        
+        if(confirmar==0){
+            boolean retorno = ProdutoDAO.excluir(id);
+            if(retorno){
+                JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(this, "Falha ao excluir o produto!");
+            }
         }else{
-            JOptionPane.showMessageDialog(this, "Falha ao excluir o produto!");
+             JOptionPane.showMessageDialog(this, "Exclusão cancelada");
         }
     }//GEN-LAST:event_btnExcluirProdutoActionPerformed
 

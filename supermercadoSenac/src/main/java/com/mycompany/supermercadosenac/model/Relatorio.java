@@ -1,6 +1,6 @@
 
 package com.mycompany.supermercadosenac.model;
 
-public class RelatorioModel {
+public class Relatorio {
     
 }
