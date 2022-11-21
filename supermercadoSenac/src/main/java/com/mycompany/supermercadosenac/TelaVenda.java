@@ -4,6 +4,9 @@
  */
 package com.mycompany.supermercadosenac;
 
+import com.mycompany.supermercadosenac.dao.ClienteDAO;
+import com.mycompany.supermercadosenac.model.Cliente;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -217,7 +220,6 @@ public class TelaVenda extends javax.swing.JFrame {
 
         lblNomeCliente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNomeCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblNomeCliente.setText("Nome teste");
         lblNomeCliente.setFocusable(false);
         lblNomeCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -317,6 +319,16 @@ public class TelaVenda extends javax.swing.JFrame {
             //evt.consume();
             JOptionPane.showMessageDialog(this,"Digite o CPF do cliente!");
         }
+        else {
+            String cpf = txtCpfCliente.getText();
+            ArrayList <Cliente> lista = ClienteDAO.buscarPorCpf(cpf);
+            
+            if (lista != null) {
+                lblNomeCliente.setText(String.valueOf(lista.getNomeCliente()));
+            }
+        }
+        
+        
     }//GEN-LAST:event_btnSelecionarClienteActionPerformed
 
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
@@ -325,6 +337,13 @@ public class TelaVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Digite o ID do produto!");
         }else if(spnQuantidade.getValue().equals(0)){
             JOptionPane.showMessageDialog(this,"Informe a quantidade!");
+        }
+        else {
+            
+            int qtd = spnQuantidade.getText();
+            int idProd = txtIdProduto.getText();
+            
+            
         }
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
