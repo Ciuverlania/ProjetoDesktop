@@ -18,33 +18,31 @@ USE `supersenac`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `produto`
+-- Table structure for table `venda`
 --
 
-DROP TABLE IF EXISTS `produto`;
+DROP TABLE IF EXISTS `venda`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `produto` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(40) NOT NULL,
-  `nome` varchar(40) NOT NULL,
-  `descricao` varchar(100) NOT NULL,
-  `quantidade` int(11) NOT NULL,
-  `peso` decimal(5,2) DEFAULT NULL,
-  `preco` decimal(9,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `codigo` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `venda` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `idCliente` int(11) NOT NULL,
+  `Valor_Total` double NOT NULL,
+  `Data_Venda` date NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `idCliente` (`idCliente`),
+  CONSTRAINT `venda_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `produto`
+-- Dumping data for table `venda`
 --
 
-LOCK TABLES `produto` WRITE;
-/*!40000 ALTER TABLE `produto` DISABLE KEYS */;
-INSERT INTO `produto` VALUES (1,'123123123','H2OH','Bebida refrescante de limão',10,0.50,5.25),(3,'123123124','Bolo de chocolate','Delicioso bolo de chocolate para você e sua família!',5,1.00,35.00),(4,'9999999','água','água',20,0.00,2.50);
-/*!40000 ALTER TABLE `produto` ENABLE KEYS */;
+LOCK TABLES `venda` WRITE;
+/*!40000 ALTER TABLE `venda` DISABLE KEYS */;
+INSERT INTO `venda` VALUES (1,2,40.25,'2022-11-22'),(2,2,40.25,'2022-11-22');
+/*!40000 ALTER TABLE `venda` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-18 15:13:23
+-- Dump completed on 2022-11-22 19:29:09

@@ -36,7 +36,7 @@ public class ClienteDAO {
             
             //3º passo - Criar o comando SQL
             PreparedStatement comandoSQL = 
-            conexao.prepareStatement("INSERT INTO cliente (CPFCliente, nomeCliente,enderecoCliente,dataNascimento,emailCliente,sexoCliente,estadoCivil) VALUES(?,?,?,?,?,?,?); "
+            conexao.prepareStatement("INSERT INTO cliente (CPF, nome,endereco,dataNascimento,email,sexo,estadoCivil) VALUES(?,?,?,?,?,?,?); "
                     , Statement.RETURN_GENERATED_KEYS );
             
             comandoSQL.setString(1, objCliente.getCPFCliente());
@@ -83,7 +83,7 @@ public class ClienteDAO {
             
             //3º passo - Criar o comando SQL
             PreparedStatement comandoSQL = 
-            conexao.prepareStatement("UPDATE cliente SET CPFCliente=?, nomeCliente=?,enderecoCliente=?,dataNascimento=?,emailCliente=?,sexoCliente=?,estadoCivil=?  WHERE idCliente =?; ");
+            conexao.prepareStatement("UPDATE cliente SET CPF=?, nome=?,endereco=?,dataNascimento=?,email=?,sexo=?,estadoCivil=?  WHERE id =?; ");
             
             comandoSQL.setString(1, objCliente.getCPFCliente());
             comandoSQL.setString(2, objCliente.getNomeCliente());
@@ -132,13 +132,13 @@ public class ClienteDAO {
                
                 while(rs.next()){
                     Cliente objNovo = new Cliente();
-                    objNovo.setIdCliente(rs.getInt("idCliente"));
-                    objNovo.setCPFCliente(rs.getString("CPFCliente"));
-                    objNovo.setNomeCliente(rs.getString("nomeCliente"));
+                    objNovo.setIdCliente(rs.getInt("id"));
+                    objNovo.setCPFCliente(rs.getString("CPF"));
+                    objNovo.setNomeCliente(rs.getString("nome"));
                     objNovo.setDataNascimento(rs.getString("dataNascimento"));
-                    objNovo.setEnderecoCliente(rs.getString("enderecoCliente"));
-                    objNovo.setEmailCliente(rs.getString("emailCliente"));
-                    objNovo.setSexoCliente(rs.getString("sexoCliente"));
+                    objNovo.setEnderecoCliente(rs.getString("endereco"));
+                    objNovo.setEmailCliente(rs.getString("email"));
+                    objNovo.setSexoCliente(rs.getString("sexo"));
                     objNovo.setEstadoCivil(rs.getString("estadoCivil"));                    
                     lista.add(objNovo);
                 
@@ -168,7 +168,7 @@ public class ClienteDAO {
             
             //3º passo - Criar o comando SQL
             PreparedStatement comandoSQL = 
-            conexao.prepareStatement("SELECT * FROM cliente WHERE nomeCliente LIKE ?;");
+            conexao.prepareStatement("SELECT * FROM cliente WHERE nome LIKE ?;");
             comandoSQL.setString(1, nome);
             
             //4º passo - Executar o comando
@@ -178,13 +178,13 @@ public class ClienteDAO {
                
                 while(rs.next()){
                     Cliente objNovo = new Cliente();
-                    objNovo.setIdCliente(rs.getInt("idCliente"));
-                    objNovo.setCPFCliente(rs.getString("CPFCliente"));
-                    objNovo.setNomeCliente(rs.getString("nomeCliente"));
+                    objNovo.setIdCliente(rs.getInt("id"));
+                    objNovo.setCPFCliente(rs.getString("CPF"));
+                    objNovo.setNomeCliente(rs.getString("nome"));
                     objNovo.setDataNascimento(rs.getString("dataNascimento"));
-                    objNovo.setEnderecoCliente(rs.getString("enderecoCliente"));
-                    objNovo.setEmailCliente(rs.getString("emailCliente"));
-                    objNovo.setSexoCliente(rs.getString("sexoCliente"));
+                    objNovo.setEnderecoCliente(rs.getString("endereco"));
+                    objNovo.setEmailCliente(rs.getString("email"));
+                    objNovo.setSexoCliente(rs.getString("sexo"));
                     objNovo.setEstadoCivil(rs.getString("estadoCivil")); ;
                     lista.add(objNovo);
                 
@@ -217,7 +217,7 @@ public class ClienteDAO {
             
             //3º passo - Criar o comando SQL
             PreparedStatement comandoSQL = 
-            conexao.prepareStatement("SELECT * FROM cliente WHERE cpfCliente LIKE ?;");
+            conexao.prepareStatement("SELECT * FROM cliente WHERE cpf LIKE ?;");
             comandoSQL.setString(1, cpf);
             
             //4º passo - Executar o comando
@@ -227,9 +227,9 @@ public class ClienteDAO {
                
                 if(rs.next()){
                     nomeRetorno = new Cliente();
-                    nomeRetorno.setNomeCliente(rs.getString("nomeCliente"));
+                    nomeRetorno.setNomeCliente(rs.getString("nome"));
                     
-                    nomeCliente = rs.getString("nomeCliente");
+                    nomeCliente = rs.getString("nome");
                 }
                 
             }
@@ -258,7 +258,7 @@ public class ClienteDAO {
             
             //3º passo - Criar o comando SQL
             PreparedStatement comandoSQL = 
-            conexao.prepareStatement("SELECT * FROM cliente WHERE cpfCliente LIKE ?;");
+            conexao.prepareStatement("SELECT * FROM cliente WHERE cpf LIKE ?;");
             comandoSQL.setString(1, cpf);
             
             //4º passo - Executar o comando
@@ -268,9 +268,9 @@ public class ClienteDAO {
                
                 if(rs.next()){
                     idRetorno = new Cliente();
-                    idRetorno.setIdCliente(rs.getInt("idCliente"));
+                    idRetorno.setIdCliente(rs.getInt("id"));
                     
-                    idCliente = rs.getInt("idCliente");
+                    idCliente = rs.getInt("id");
                 }
                 
             }
@@ -298,7 +298,7 @@ public class ClienteDAO {
             
             //3º passo - Criar o comando SQL
             PreparedStatement comandoSQL = 
-            conexao.prepareStatement("SELECT * FROM cliente WHERE cpfCliente LIKE ?;");
+            conexao.prepareStatement("SELECT * FROM cliente WHERE cpf LIKE ?;");
             comandoSQL.setString(1, cpf);
             
             //4º passo - Executar o comando
@@ -308,13 +308,13 @@ public class ClienteDAO {
                
                 while(rs.next()){
                     Cliente objNovo = new Cliente();
-                    objNovo.setIdCliente(rs.getInt("idCliente"));
-                    objNovo.setCPFCliente(rs.getString("CPFCliente"));
-                    objNovo.setNomeCliente(rs.getString("nomeCliente"));
+                    objNovo.setIdCliente(rs.getInt("id"));
+                    objNovo.setCPFCliente(rs.getString("CPF"));
+                    objNovo.setNomeCliente(rs.getString("nome"));
                     objNovo.setDataNascimento(rs.getString("dataNascimento"));
-                    objNovo.setEnderecoCliente(rs.getString("enderecoCliente"));
-                    objNovo.setEmailCliente(rs.getString("emailCliente"));
-                    objNovo.setSexoCliente(rs.getString("sexoCliente"));
+                    objNovo.setEnderecoCliente(rs.getString("endereco"));
+                    objNovo.setEmailCliente(rs.getString("email"));
+                    objNovo.setSexoCliente(rs.getString("sexo"));
                     objNovo.setEstadoCivil(rs.getString("estadoCivil")); ;
                     lista.add(objNovo);
                 
@@ -345,7 +345,7 @@ public class ClienteDAO {
             
             //3º passo - Criar o comando SQL
             PreparedStatement comandoSQL = 
-            conexao.prepareStatement("DELETE FROM cliente WHERE idCliente = ?; ");
+            conexao.prepareStatement("DELETE FROM cliente WHERE id = ?; ");
             
             comandoSQL.setInt(1, id);
             

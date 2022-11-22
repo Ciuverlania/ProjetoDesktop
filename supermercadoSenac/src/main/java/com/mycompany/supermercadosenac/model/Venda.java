@@ -15,10 +15,9 @@ public class Venda {
 
     private int idVenda;
     private int idCliente;
+    private String NomeCliente;
     private double valorTotalVenda; 
     private String dataVenda;
-    
-    private ArrayList<ItemVenda> listaItens = null;
 
     public Venda() {
     }
@@ -27,6 +26,19 @@ public class Venda {
         this.idVenda = idVenda;
         this.idCliente = idCliente;
         this.valorTotalVenda = valorTotalVenda;
+        this.dataVenda = dataVenda;
+    }
+
+    public Venda(int idCliente, double valorTotal, String dataVenda) {
+        this.idCliente = idCliente;
+        this.valorTotalVenda = valorTotal;
+        this.dataVenda = dataVenda;
+    }
+    
+        public Venda(int idVenda, String dataVenda,String nomeCliente,double valorTotal) {
+        this.idCliente = idCliente;
+        this.NomeCliente = nomeCliente;
+        this.valorTotalVenda = valorTotal;
         this.dataVenda = dataVenda;
     }
 
@@ -62,12 +74,12 @@ public class Venda {
         this.dataVenda = dataVenda;
     }
 
-    public ArrayList<ItemVenda> getListaItens() {
-        return listaItens;
+    public String getNomeCliente() {
+        return NomeCliente;
     }
 
-    public void setListaItens(ArrayList<ItemVenda> listaItens) {
-        this.listaItens = listaItens;
+    public void setNomeCliente(String NomeCliente) {
+        this.NomeCliente = NomeCliente;
     }
     
     

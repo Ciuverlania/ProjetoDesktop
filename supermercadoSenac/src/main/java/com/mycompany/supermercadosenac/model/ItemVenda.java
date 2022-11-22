@@ -29,6 +29,13 @@ public class ItemVenda {
         this.qtdProduto = qtdProduto;
     }
 
+    public ItemVenda(int idVenda, int idProduto, int QuantidadeProduto, double ValorProduto) {
+        this.idVenda = idVenda;
+        this.idProduto = idProduto;
+        this.precoProduto = ValorProduto;
+        this.qtdProduto = QuantidadeProduto;
+    }
+
     public int getIdItemVenda() {
         return idItemVenda;
     }

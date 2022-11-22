@@ -25,17 +25,17 @@ DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cliente` (
-  `idCliente` int(11) NOT NULL AUTO_INCREMENT,
-  `CPFCliente` varchar(30) NOT NULL,
-  `nomeCliente` varchar(40) NOT NULL,
-  `enderecoCliente` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `CPF` varchar(30) NOT NULL,
+  `nome` varchar(40) NOT NULL,
+  `endereco` varchar(50) NOT NULL,
   `dataNascimento` date NOT NULL,
-  `emailCliente` varchar(40) NOT NULL,
-  `sexoCliente` varchar(20) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `sexo` varchar(20) NOT NULL,
   `estadoCivil` varchar(30) NOT NULL,
-  PRIMARY KEY (`idCliente`),
-  UNIQUE KEY `CPFCliente` (`CPFCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `CPF` (`CPF`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'114.332.568-12','Leonardo Fujimura','Rua aaaaa','2002-03-30','idaiei@iqweiqw.com','Masculino','Solteiro(a)'),(2,'111.111.111-11','Leonardo chaves','asd1','2022-11-03','qwe123','Masculino','Casado(a)'),(3,'123.123.123-12','Leonardo Soares','asdasdwq','2022-11-08','qwe123','Masculino','Viúvo(a)'),(4,'555.555.555-55','Lucas Arthur','asdasf','2022-11-15','q1234','Masculino','Separado(a)');
+INSERT INTO `cliente` VALUES (2,'111.111.111-11','Leonardo','rua aaa','2022-11-04','aslda@gamil.com','Masculino','Solteiro(a)');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-18 15:13:24
+-- Dump completed on 2022-11-22 19:29:09
