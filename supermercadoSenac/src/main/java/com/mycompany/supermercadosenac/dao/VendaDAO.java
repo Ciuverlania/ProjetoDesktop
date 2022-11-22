@@ -31,11 +31,11 @@ public class VendaDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexao = DriverManager.getConnection(url, login, senha);
             
-            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO Venda (idVenda,idCliente, valorTotalVenda, dataVenda) VALUES (?, ?, ?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO Venda (id,fk_idCliente, valor, dataVenda) VALUES (?, ?,?,?)", Statement.RETURN_GENERATED_KEYS);
             comandoSQL.setInt(1, obj.getIdVenda());
             comandoSQL.setInt(2, obj.getIdCliente());
             comandoSQL.setDouble(3, obj.getValorTotalVenda());
-            comandoSQL.setDate(4, obj.getDataVenda());
+            comandoSQL.setString(4, obj.getDataVenda());
             
             int linhasAfetadas = comandoSQL.executeUpdate();
             if (linhasAfetadas > 0) {

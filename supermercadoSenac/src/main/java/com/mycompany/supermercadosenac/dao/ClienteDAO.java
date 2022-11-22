@@ -243,6 +243,47 @@ public class ClienteDAO {
         return nomeCliente;
     }
     
+    public static int pegarIdPorCpf(String cpf) {
+        Connection conexao = null;
+        
+        Cliente idRetorno = null;
+        int idCliente = 0;
+        
+        try {
+            //1º passo - Carregar o Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //2º passo - Abrir a conexão
+            conexao = DriverManager.getConnection(url, login, senha);
+            
+            //3º passo - Criar o comando SQL
+            PreparedStatement comandoSQL = 
+            conexao.prepareStatement("SELECT * FROM cliente WHERE cpfCliente LIKE ?;");
+            comandoSQL.setString(1, cpf);
+            
+            //4º passo - Executar o comando
+            ResultSet rs = comandoSQL.executeQuery();
+            
+            if(rs!=null){
+               
+                if(rs.next()){
+                    idRetorno = new Cliente();
+                    idRetorno.setIdCliente(rs.getInt("idCliente"));
+                    
+                    idCliente = rs.getInt("idCliente");
+                }
+                
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return idCliente;
+    }
+    
 
     public static ArrayList<Cliente> buscarPorCpf(String cpf) {
         Connection conexao = null;

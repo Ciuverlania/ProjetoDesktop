@@ -13,6 +13,9 @@ import com.mycompany.supermercadosenac.model.Produto;
 import com.mycompany.supermercadosenac.model.Venda;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -399,7 +402,10 @@ public class TelaVenda extends javax.swing.JFrame {
             Cliente objCliente = new Cliente();
             
             String nomeCliente = ClienteDAO.pegarNomePorCpf(cpf);
+
+            int idCLiente = ClienteDAO.pegarIdPorCpf(cpf);
             
+
            
             
             this.lblNomeCliente.setText(nomeCliente);
@@ -471,11 +477,20 @@ public class TelaVenda extends javax.swing.JFrame {
 
         //Resgato os dados da Nota
         String cpf = txtCpfCliente.getValue().toString();
+        
+        int idCLiente = ClienteDAO.pegarIdPorCpf(cpf);
+        double valorTotal = Double.parseDouble(lblTotal.getText());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+        LocalDate dataAtual = LocalDate.now();
+        String dataCompra = dataAtual.format(dtf);
+        
 
         //Crio o objeto NotaFiscal e passo os produtos e os dados da tela
         Venda objVenda = new Venda();
-        objVenda.setCpfCliente(cpf);
+        objVenda.setIdCliente(idCLiente);
         objVenda.setListaItens(listaItens);
+        objVenda.setValorTotalVenda(valorTotal);
+        objVenda.setDataVenda(dataCompra);
 
         boolean retorno = VendaDAO.finalizarCompra(objVenda);
         if (retorno){

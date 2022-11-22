@@ -16,14 +16,14 @@ public class Venda {
     private int idVenda;
     private int idCliente;
     private double valorTotalVenda; 
-    private Date dataVenda;
+    private String dataVenda;
     
     private ArrayList<ItemVenda> listaItens = null;
 
     public Venda() {
     }
 
-    public Venda(int idVenda, int idCliente, double valorTotalVenda, Date dataVenda) {
+    public Venda(int idVenda, int idCliente, ArrayList<ItemVenda> listaItens,double valorTotalVenda, String dataVenda) {
         this.idVenda = idVenda;
         this.idCliente = idCliente;
         this.valorTotalVenda = valorTotalVenda;
@@ -54,11 +54,11 @@ public class Venda {
         this.valorTotalVenda = valorTotalVenda;
     }
 
-    public Date getDataVenda() {
+    public String getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(Date dataVenda) {
+    public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
     }
 
