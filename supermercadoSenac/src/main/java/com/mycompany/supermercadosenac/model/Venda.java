@@ -62,4 +62,14 @@ public class Venda {
         this.dataVenda = dataVenda;
     }
 
+    public ArrayList<ItemVenda> getListaItens() {
+        return listaItens;
+    }
+
+    public void setListaItens(ArrayList<ItemVenda> listaItens) {
+        this.listaItens = listaItens;
+    }
+    
+    
+
 }

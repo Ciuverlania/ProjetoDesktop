@@ -6,9 +6,13 @@ package com.mycompany.supermercadosenac;
 
 import com.mycompany.supermercadosenac.dao.ClienteDAO;
 import com.mycompany.supermercadosenac.dao.ProdutoDAO;
+import com.mycompany.supermercadosenac.dao.VendaDAO;
 import com.mycompany.supermercadosenac.model.Cliente;
+import com.mycompany.supermercadosenac.model.ItemVenda;
 import com.mycompany.supermercadosenac.model.Produto;
+import com.mycompany.supermercadosenac.model.Venda;
 import java.awt.event.KeyEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -182,7 +186,7 @@ public class TelaVenda extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addGap(6, 6, 6))
         );
         jPanel2Layout.setVerticalGroup(
@@ -270,20 +274,24 @@ public class TelaVenda extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addGap(3, 3, 3)
-                        .addComponent(txtCpfCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                        .addComponent(txtCpfCliente)
                         .addGap(214, 214, 214)
                         .addComponent(btnSelecionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel2)
+                                .addGap(21, 21, 21))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -294,7 +302,7 @@ public class TelaVenda extends javax.swing.JFrame {
                                 .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(204, 204, 204))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 509, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -307,9 +315,11 @@ public class TelaVenda extends javax.swing.JFrame {
                     .addComponent(btnSelecionarCliente)
                     .addComponent(txtCpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel3)
-                    .addComponent(lblNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -443,7 +453,36 @@ public class TelaVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        // TODO add your handling code here:
+       
+        ArrayList<ItemVenda> listaItens = new ArrayList<>();
+        if(tblVenda.getRowCount()>0){
+                for(int i=0;i<tblVenda.getRowCount();i++){
+                    ItemVenda item = new ItemVenda();
+
+                    item.setIdProduto(Integer.parseInt(tblVenda.getValueAt(i, 0).toString()));
+                    item.setNomeProduto(tblVenda.getValueAt(i, 1).toString());
+                    item.setQtdProduto(Integer.parseInt(tblVenda.getValueAt(i, 2).toString()));
+                    item.setPrecoProduto(Double.parseDouble(tblVenda.getValueAt(i, 3).toString()));
+
+                    listaItens.add(item);
+
+                }
+        }
+
+        //Resgato os dados da Nota
+        String cpf = txtCpfCliente.getValue().toString();
+
+        //Crio o objeto NotaFiscal e passo os produtos e os dados da tela
+        Venda objVenda = new Venda();
+        objVenda.setCpfCliente(cpf);
+        objVenda.setListaItens(listaItens);
+
+        boolean retorno = VendaDAO.finalizarCompra(objVenda);
+        if (retorno){
+            JOptionPane.showMessageDialog(this, "Compra finalizada com sucesso!");
+        } else{
+            JOptionPane.showMessageDialog(this, "Falha na gravação!");
+        }
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void txtCpfClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfClienteActionPerformed
