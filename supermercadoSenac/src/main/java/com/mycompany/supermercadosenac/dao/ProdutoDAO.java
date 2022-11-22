@@ -4,6 +4,7 @@
  */
 package com.mycompany.supermercadosenac.dao;
 
+import com.mycompany.supermercadosenac.TelaVenda;
 import com.mycompany.supermercadosenac.model.Produto;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -285,6 +286,50 @@ public class ProdutoDAO {
         
         return retorno;
 
+    }
+
+    public static ArrayList<Produto> carrinho(int quantidade, int id) {
+        Connection conexao = null;
+        ArrayList<Produto> lista = new ArrayList<Produto>();
+        
+        try {
+            //1º passo - Carregar o Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //2º passo - Abrir a conexão
+            conexao = DriverManager.getConnection(url, login, senha);
+            
+            //3º passo - Criar o comando SQL
+            PreparedStatement comandoSQL = 
+            conexao.prepareStatement("SELECT id, nome, preco FROM produto where id = ?;");
+            
+            comandoSQL.setInt(1, id);
+            
+            //4º passo - Executar o comando
+            ResultSet rs = comandoSQL.executeQuery();
+            
+
+            
+            if(rs!=null){
+               
+                while(rs.next()){
+                    Produto objNovo = new Produto();
+                    objNovo.setIdProduto(rs.getInt("id"));
+                    objNovo.setNomeProduto(rs.getString("nome"));
+                    objNovo.setPrecoProduto(rs.getDouble("preco"));                   
+                    lista.add(objNovo);
+                
+                }
+                
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return lista;
     }
     
 }
