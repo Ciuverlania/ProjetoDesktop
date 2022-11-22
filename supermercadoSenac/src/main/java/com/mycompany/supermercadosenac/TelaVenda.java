@@ -56,6 +56,7 @@ public class TelaVenda extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -147,6 +148,13 @@ public class TelaVenda extends javax.swing.JFrame {
             }
         });
 
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -164,12 +172,17 @@ public class TelaVenda extends javax.swing.JFrame {
                 .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
         jPanel2Layout.setVerticalGroup(
@@ -179,6 +192,8 @@ public class TelaVenda extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnRemover)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLimpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
@@ -338,11 +353,32 @@ public class TelaVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tblVenda.getSelectedRow();
+        int quantidade = Integer.parseInt(tblVenda.getValueAt(linhaSelecionada, 2).toString());
+
+        String[] opcoes={"Sim, confirmar", "Não, cancelar"};
+            
+        int confirmar = JOptionPane.showOptionDialog(this,
+                    "Confirmar exclusão?","Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opcoes,opcoes[0]);
+        
+        if(confirmar==0){
+            
+            DefaultTableModel modelo = (DefaultTableModel) tblVenda.getModel();
+            
+                total-=(Double.parseDouble(modelo.getValueAt(linhaSelecionada, 3).toString())*quantidade);
+                String valorMostrado = String.valueOf(total);
+                lblTotal.setText(valorMostrado);
+            modelo.removeRow(linhaSelecionada);
+            contator--;
+                JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
+        }else{
+             JOptionPane.showMessageDialog(this, "Exclusão cancelada");
+             
+        }                                          
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarClienteActionPerformed
-        if (txtCpfCliente.getValue() == null) {
+        if (txtCpfCliente.getValue()==null) {
             //evt.consume();
             JOptionPane.showMessageDialog(this,"Digite o CPF do cliente!");
         }
@@ -426,6 +462,27 @@ public class TelaVenda extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblVendaComponentAdded
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+                 DefaultTableModel modelo = (DefaultTableModel) tblVenda.getModel();
+         String[] opcoes={"Sim, limpar", "Não, cancelar"};
+            int confirmar = JOptionPane.showOptionDialog(this,"Deseja limpar o carrinho?\nEssa opção irá remover todos os produtos","Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opcoes,opcoes[0]);
+             if(confirmar==0){
+                 
+                 if(modelo.getRowCount()==0){
+                     JOptionPane.showMessageDialog(this, "O carrinho já está vazio");
+                 }else{
+                 
+                 modelo.setRowCount(0);
+                 
+                 contator=0;
+                 
+                total=0;
+                String valorMostrado = String.valueOf(total);
+                lblTotal.setText(valorMostrado);
+                 }
+             }
+    }//GEN-LAST:event_btnLimparActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,6 +523,7 @@ public class TelaVenda extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionarProduto;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnComprar;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSelecionarCliente;
     private javax.swing.JEditorPane jEditorPane1;
